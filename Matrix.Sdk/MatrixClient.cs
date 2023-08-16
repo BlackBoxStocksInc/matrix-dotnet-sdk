@@ -74,6 +74,22 @@
 
             IsLoggedIn = true;
         }
+        
+        public void LoginWithAccessTokenAsync(Uri baseAddress, string userId, string accessToken)
+        {
+            _userService.BaseAddress = baseAddress;
+            _roomService.BaseAddress = baseAddress;
+            _eventService.BaseAddress = baseAddress;
+            BaseAddress = baseAddress;
+                
+            UserId = userId;
+            _accessToken = accessToken;
+
+            _pollingService.Init(baseAddress, _accessToken);
+
+            IsLoggedIn = true;
+        }
+        
 
         public void Start(string? nextBatch = null)
         {
