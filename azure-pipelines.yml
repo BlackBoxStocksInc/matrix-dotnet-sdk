@@ -1,0 +1,81 @@
+trigger:
+  batch: true
+  tags:
+    include:
+    - 1.*
+  branches:
+    include:
+    - main
+    - releases/*
+  
+pool:
+  name: default
+  demands:
+  - Agent.OS -equals Windows_NT
+  
+parameters:
+- name: projects
+  type: object
+  default:
+  - Matrix.Sdk
+
+steps:
+- task: UseDotNet@2
+  displayName: 'Install .NET SDK'
+  inputs:
+    packageType: 'sdk'
+    version: '6.x'
+
+- task: gitversion/setup@0
+  displayName: 'Install Gitversion'
+  inputs:
+    versionSpec: '5.x'
+
+- task: NuGetToolInstaller@1
+  displayName:  "NuGet Install"
+  inputs:
+    versionSpec: 6.1.0
+    checkLatest: true
+
+- task: gitversion/execute@0
+  displayName: Update Project Versions
+  inputs:
+    useConfigFile: true
+    configFilePath: 'GitVersion.yml'
+- task: DeleteFiles@1
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)\Build\Packages'
+    Contents: '*'
+    RemoveSourceFolder: true
+    
+- ${{ each project in parameters.projects }}:
+  - script: echo ${{ project }}
+  - task: DotNetCoreCLI@2
+    displayName: 'Restore ${{ project }}'
+    inputs:
+      command: 'restore'
+      feedsToUse: config
+      nugetConfigPath: NuGet.DevOps.config
+      projects: '${{ project }}/${{ project }}.csproj'
+      restoreArguments: '/p:Configuration=$(BuildConfiguration) '
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Build ${{ project }}'
+    inputs:
+      command: 'build'
+      projects: '${{ project }}/${{ project }}.csproj'
+      arguments: '--configuration $(BuildConfiguration) --no-restore'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Pack ${{ project }}'
+    inputs:
+      command: custom
+      projects: ${{ project }}/${{ project }}.csproj
+      custom: pack
+      arguments: '--output $(Build.SourcesDirectory)\Build\Packages --no-build /p:PackageVersion=$(GitVersion.FullSemVer) /p:Configuration=$(BuildConfiguration) '
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.SourcesDirectory)\Build\Packages'
+    ArtifactName: 'packages'
+    publishLocation: 'Container'
