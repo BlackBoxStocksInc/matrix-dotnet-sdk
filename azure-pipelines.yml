@@ -26,6 +26,11 @@ steps:
     packageType: 'sdk'
     version: '6.x'
 
+- task: gitversion/setup@0
+  displayName: 'Install Gitversion'
+  inputs:
+    versionSpec: '5.x'
+
 - task: NuGetToolInstaller@1
   displayName:  "NuGet Install"
   inputs:
@@ -37,22 +42,6 @@ steps:
     SourceFolder: '$(Build.SourcesDirectory)\Build\Packages'
     Contents: '*'
     RemoveSourceFolder: true
-
-- task: CmdLine@2
-  inputs:
-    script: |
-      echo "Structure of work folder of this pipeline:"
-      tree $(Agent.WorkFolder)\1 /f
-      
-      echo "Build.ArtifactStagingDirectory:" 
-      
-      echo "$(Build.ArtifactStagingDirectory)"
-      
-      echo "Build.BinariesDirectory:" 
-      
-      echo "$(Build.BinariesDirectory)"
-      
-      echo "Build.SourcesDirectory:"
     
 - ${{ each project in parameters.projects }}:
   - script: echo ${{ project }}
