@@ -21,5 +21,3 @@ branches:
     is-release-branch: true
     is-mainline: false
     pre-release-weight: 30000
-ignore:
-  sha: [fa447cd77258b7348df667c4a6653d169879a520]
