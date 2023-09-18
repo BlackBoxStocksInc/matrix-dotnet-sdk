@@ -37,12 +37,6 @@ steps:
     versionSpec: 6.1.0
     checkLatest: true
 
-- task: gitversion/execute@0
-  displayName: Update Project Versions
-  inputs:
-    useConfigFile: true
-    configFilePath: 'GitVersion.yml'
-
 - task: DeleteFiles@1
   inputs:
     SourceFolder: '$(Build.SourcesDirectory)\Build\Packages'
@@ -71,7 +65,7 @@ steps:
       command: custom
       projects: ${{ project }}/${{ project }}.csproj
       custom: pack
-      arguments: '--output $(Build.SourcesDirectory)\Build\Packages --no-build /p:PackageVersion=$(GitVersion.FullSemVer) /p:Configuration=$(BuildConfiguration) '
+      arguments: '--output $(Build.SourcesDirectory)\Build\Packages --no-build /p:Configuration=$(BuildConfiguration) '
 
 - task: PublishBuildArtifacts@1
   inputs:
