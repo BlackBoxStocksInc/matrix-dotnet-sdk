@@ -60,9 +60,6 @@ steps:
     displayName: 'Restore ${{ project }}'
     inputs:
       command: 'restore'
-      feedsToUse: config
-      nugetConfigPath: NuGet.DevOps.config
-
       projects: '${{ project }}/${{ project }}.csproj'
       restoreArguments: '/p:Configuration=$(BuildConfiguration) '
 
