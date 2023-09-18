@@ -37,6 +37,22 @@ steps:
     SourceFolder: '$(Build.SourcesDirectory)\Build\Packages'
     Contents: '*'
     RemoveSourceFolder: true
+
+- task: CmdLine@2
+  inputs:
+    script: |
+      echo "Structure of work folder of this pipeline:"
+      tree $(Agent.WorkFolder)\1 /f
+      
+      echo "Build.ArtifactStagingDirectory:" 
+      
+      echo "$(Build.ArtifactStagingDirectory)"
+      
+      echo "Build.BinariesDirectory:" 
+      
+      echo "$(Build.BinariesDirectory)"
+      
+      echo "Build.SourcesDirectory:"
     
 - ${{ each project in parameters.projects }}:
   - script: echo ${{ project }}
@@ -46,6 +62,7 @@ steps:
       command: 'restore'
       feedsToUse: config
       nugetConfigPath: NuGet.DevOps.config
+
       projects: '${{ project }}/${{ project }}.csproj'
       restoreArguments: '/p:Configuration=$(BuildConfiguration) '
 
