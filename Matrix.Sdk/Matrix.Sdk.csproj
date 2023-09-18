@@ -17,7 +17,7 @@
         <Version>1.0.8</Version>
         <Copyright>Copyright © Baking Bad 2019-2023</Copyright>
         <Nullable>enable</Nullable>
-        <TargetFramework>netstandard2.0</TargetFramework>
+        <TargetFramework>net6.0</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>
