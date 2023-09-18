@@ -1,0 +1,25 @@
+assembly-versioning-scheme: MajorMinorPatch
+mode: ContinuousDeployment
+branches:
+  main:
+    mode: ContinuousDeployment
+    prevent-increment-of-merged-branch-version: true
+    track-merge-target: false
+    regex: main
+    tracks-release-branches: false
+    is-mainline: true
+    is-release-branch: false
+  release:
+    regex: ^releases?[/-]
+    mode: ContinuousDelivery
+    tag: beta
+    increment: None
+    prevent-increment-of-merged-branch-version: true
+    track-merge-target: false
+    source-branches: [ 'develop', 'main', 'support', 'release' ]
+    tracks-release-branches: false
+    is-release-branch: true
+    is-mainline: false
+    pre-release-weight: 30000
+ignore:
+  sha: [fa447cd77258b7348df667c4a6653d169879a520]
