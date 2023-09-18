@@ -37,6 +37,12 @@ steps:
     versionSpec: 6.1.0
     checkLatest: true
 
+- task: gitversion/execute@0
+  displayName: Update Project Versions
+  inputs:
+    useConfigFile: true
+    configFilePath: 'GitVersion.yml'
+
 - task: DeleteFiles@1
   inputs:
     SourceFolder: '$(Build.SourcesDirectory)\Build\Packages'
