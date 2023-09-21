@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33815.320
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlackBoxStocks.Matrix.Sdk", "BlackBoxStocks.Matrix.Sdk\BlackBoxStocks.Matrix.Sdk.csproj", "{2D50E421-BFA5-4189-8DC0-1C31EBA984C1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlackBoxStocks.Matrix.Sdk.Tests", "BlackBoxStocks.Matrix.Sdk.Tests\Matrix.Sdk.Tests.csproj", "{0C4E182F-448E-437E-8ACC-703F0FCD4680}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlackBoxStocks.Matrix.Sdk.Sample.Console", "BlackBoxStocks.Matrix.Sdk.Sample.Console\Matrix.Sdk.Sample.Console.csproj", "{9939DED9-E451-4680-8206-DD9BA1F0959A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2D50E421-BFA5-4189-8DC0-1C31EBA984C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D50E421-BFA5-4189-8DC0-1C31EBA984C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D50E421-BFA5-4189-8DC0-1C31EBA984C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D50E421-BFA5-4189-8DC0-1C31EBA984C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C4E182F-448E-437E-8ACC-703F0FCD4680}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C4E182F-448E-437E-8ACC-703F0FCD4680}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C4E182F-448E-437E-8ACC-703F0FCD4680}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C4E182F-448E-437E-8ACC-703F0FCD4680}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9939DED9-E451-4680-8206-DD9BA1F0959A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9939DED9-E451-4680-8206-DD9BA1F0959A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9939DED9-E451-4680-8206-DD9BA1F0959A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9939DED9-E451-4680-8206-DD9BA1F0959A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
