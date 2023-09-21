@@ -35,24 +35,28 @@ namespace BlackBoxStocks.Matrix.Sdk.Core.Domain
 
             private static List<MatrixRoom.MatrixRoom> GetMatrixRoomsFromSync(Rooms rooms)
             {
-                var joinedMatrixRooms = rooms.Join.Select(pair => MatrixRoomFactory.CreateJoined(pair.Key, pair.Value))
-                    .ToList();
-                var invitedMatrixRooms = rooms.Invite
-                    .Select(pair => MatrixRoomFactory.CreateInvite(pair.Key, pair.Value)).ToList();
-                var leftMatrixRooms = rooms.Leave.Select(pair => MatrixRoomFactory.CreateLeft(pair.Key, pair.Value))
-                    .ToList();
+                if (rooms == null) return new List<MatrixRoom.MatrixRoom>();
+                
+                var joinedMatrixRooms = rooms.Join != null ? rooms.Join.Select(pair => MatrixRoomFactory.CreateJoined(pair.Key, pair.Value))
+                    .ToList(): new List<MatrixRoom.MatrixRoom>();
+                var invitedMatrixRooms = rooms.Invite != null ? rooms.Invite
+                    .Select(pair => MatrixRoomFactory.CreateInvite(pair.Key, pair.Value)).ToList() : new List<MatrixRoom.MatrixRoom>();
+                var leftMatrixRooms = rooms.Leave != null ? rooms.Leave.Select(pair => MatrixRoomFactory.CreateLeft(pair.Key, pair.Value))
+                    .ToList() : new List<MatrixRoom.MatrixRoom>();
 
                 return joinedMatrixRooms.Concat(invitedMatrixRooms).Concat(leftMatrixRooms).ToList();
             }
 
             private static List<BaseRoomEvent> GetMatrixEventsFromSync(Rooms rooms)
             {
-                var joinedMatrixRoomEvents = rooms.Join
-                    .SelectMany(pair => MatrixRoomEventFactory.CreateFromJoined(pair.Key, pair.Value)).ToList();
-                var invitedMatrixRoomEvents = rooms.Invite
-                    .SelectMany(pair => MatrixRoomEventFactory.CreateFromInvited(pair.Key, pair.Value)).ToList();
-                var leftMatrixRoomEvents = rooms.Leave
-                    .SelectMany(pair => MatrixRoomEventFactory.CreateFromLeft(pair.Key, pair.Value)).ToList();
+                if (rooms == null) return new List<BaseRoomEvent>();
+
+                var joinedMatrixRoomEvents = rooms.Join != null ? rooms.Join
+                    .SelectMany(pair => MatrixRoomEventFactory.CreateFromJoined(pair.Key, pair.Value)).ToList() : new List<BaseRoomEvent>();
+                var invitedMatrixRoomEvents = rooms.Invite != null ? rooms.Invite
+                    .SelectMany(pair => MatrixRoomEventFactory.CreateFromInvited(pair.Key, pair.Value)).ToList() : new List<BaseRoomEvent>();
+                var leftMatrixRoomEvents = rooms.Leave != null ? rooms.Leave
+                    .SelectMany(pair => MatrixRoomEventFactory.CreateFromLeft(pair.Key, pair.Value)).ToList() : new List<BaseRoomEvent>();
 
                 return joinedMatrixRoomEvents.Concat(invitedMatrixRoomEvents).Concat(leftMatrixRoomEvents).ToList();
             }
