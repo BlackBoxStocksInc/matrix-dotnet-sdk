@@ -17,7 +17,7 @@ parameters:
 - name: projects
   type: object
   default:
-  - Matrix.Sdk
+  - BlackBoxStocks.Matrix.Sdk
 
 steps:
 - task: UseDotNet@2
