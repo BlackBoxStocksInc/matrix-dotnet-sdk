@@ -18,6 +18,7 @@
         public class MessageType
         {
             public const string Text = "m.text";
+            public const string Image = "m.image";
         }
     }
 }

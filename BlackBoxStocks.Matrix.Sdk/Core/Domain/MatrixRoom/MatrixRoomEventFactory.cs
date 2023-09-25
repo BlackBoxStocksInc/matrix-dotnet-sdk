@@ -23,6 +23,8 @@ namespace BlackBoxStocks.Matrix.Sdk.Core.Domain.MatrixRoom
                 else if (TextMessageEvent.Factory.TryCreateFrom(timelineEvent, roomId,
                              out TextMessageEvent textMessageEvent))
                     roomEvents.Add(textMessageEvent);
+                else if (ImageMessageEvent.Factory.TryCreateFrom(timelineEvent, roomId, out var imageMessageEvent))
+                    roomEvents.Add(imageMessageEvent);
 
             return roomEvents;
         }
