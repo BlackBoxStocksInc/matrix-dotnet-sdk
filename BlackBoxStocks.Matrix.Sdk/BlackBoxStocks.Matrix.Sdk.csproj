@@ -14,7 +14,9 @@
         <Authors>Mikhail Tatarenko</Authors>
         <Product>BlackBoxStocks.Matrix.Sdk</Product>
         <Description>This open-source library allows you to build .NET apps compatible with Matrix Protocol - http://www.matrix.org.</Description>
-        <Version>1.0.9</Version>
+        <AssemblyVersion Condition=" '$(GITVERSION_AssemblySemVer)' != '' ">$(GITVERSION_AssemblySemVer)</AssemblyVersion>
+        <FileVersion Condition=" '$(GITVERSION_AssemblySemFileVer)' != '' ">$(GITVERSION_AssemblySemFileVer)</FileVersion>
+        <InformationalVersion Condition=" '$(GITVERSION_FullSemVer)' != '' ">$(GITVERSION_FullSemVer)</InformationalVersion>
         <Copyright>Copyright © Baking Bad 2019-2023</Copyright>
         <Nullable>enable</Nullable>
         <TargetFramework>net6.0</TargetFramework>
