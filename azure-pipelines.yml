@@ -30,6 +30,12 @@ steps:
   displayName: 'Install Gitversion'
   inputs:
     versionSpec: '5.x'
+    
+- task: gitversion/execute@0
+  displayName: Update Project Versions
+  inputs:
+    useConfigFile: true
+    configFilePath: 'GitVersion.yml'
 
 - task: NuGetToolInstaller@1
   displayName:  "NuGet Install"
@@ -65,7 +71,7 @@ steps:
       command: custom
       projects: ${{ project }}/${{ project }}.csproj
       custom: pack
-      arguments: '--output $(Build.SourcesDirectory)\Build\Packages --no-build /p:Configuration=$(BuildConfiguration) '
+      arguments: '--output $(Build.SourcesDirectory)\Build\Packages --no-build /p:PackageVersion=$(GitVersion.FullSemVer) /p:Configuration=$(BuildConfiguration) '
 
 - task: PublishBuildArtifacts@1
   inputs:
