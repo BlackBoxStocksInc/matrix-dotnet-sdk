@@ -10,6 +10,7 @@ using BlackBoxStocks.Matrix.Sdk.Core.Infrastructure.Dto.Login;
 using BlackBoxStocks.Matrix.Sdk.Core.Infrastructure.Dto.Room.Create;
 using BlackBoxStocks.Matrix.Sdk.Core.Infrastructure.Dto.Room.Join;
 using BlackBoxStocks.Matrix.Sdk.Core.Infrastructure.Dto.Room.Joined;
+using BlackBoxStocks.Matrix.Sdk.Core.Infrastructure.Dto.User;
 using BlackBoxStocks.Matrix.Sdk.Core.Infrastructure.Services;
 
 namespace BlackBoxStocks.Matrix.Sdk
@@ -155,6 +156,11 @@ namespace BlackBoxStocks.Matrix.Sdk
             SyncBatch batch = syncBatchEventArgs.SyncBatch;
 
             OnMatrixRoomEventsReceived.Invoke(this, new MatrixRoomEventsEventArgs(batch.MatrixRoomEvents,  batch.NextBatch));
+        }
+
+        public async Task<UserResponse> GetUser(string userId)
+        {
+            return await _userService.GetUser(userId, _cts.Token);
         }
 
         private string CreateTransactionId()

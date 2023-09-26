@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using BlackBoxStocks.Matrix.Sdk.Core.Domain.MatrixRoom;
 using BlackBoxStocks.Matrix.Sdk.Core.Infrastructure.Dto.Room.Create;
 using BlackBoxStocks.Matrix.Sdk.Core.Infrastructure.Dto.Room.Join;
+using BlackBoxStocks.Matrix.Sdk.Core.Infrastructure.Dto.User;
 
 namespace BlackBoxStocks.Matrix.Sdk
 {
@@ -45,5 +46,7 @@ namespace BlackBoxStocks.Matrix.Sdk
         Task<List<string>> GetJoinedRoomsIdsAsync();
 
         Task LeaveRoomAsync(string roomId);
+
+        Task<UserResponse> GetUser(string userId);
     }
 }
